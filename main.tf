@@ -22,14 +22,14 @@ resource "aws_instance" "web" {
   ami           = data.aws_ami.app_ami.id
   instance_type = "t3.nano"
 
-  vpc_security_group_ids = [module.web_new.security_group_id]
+  vpc_security_group_ids = [module.web_sg.security_group_id]
   
   tags = {
     Name = "HelloWorld"
   }
 }
 
-module "security-group" {
+module "web_sg" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "5.1.0"
   name = "web_new"
